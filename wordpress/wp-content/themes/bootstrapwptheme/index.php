@@ -3,21 +3,48 @@
 <div class="container index">
     <div class="row">
         <div class="col-md-8">
-            <div class="panel panel default">
+            <div class="panel panel-default">
                 <div class="panel-heading">
                     <h3 class='panel-title'>Blog Posts</h3>
-                </div>
+                 </div>
                 <div class="panel-body">
                     <?php if(have_posts()) :?>
                         <?php while(have_posts()) : the_post(); ?>
-                            <div class="row">
-                                <div class="col-md-3">
-                                    Image
+                            <article class="post"> 
+                                <div class="row">
+                                    <?php if(has_post_thumbnail()) : ?>
+                                        <div class="col-md-3">
+                                            <div class="post-thumbnail">
+                                                <?php the_post_thumbanil();?>
+                                            </div>
+                                        </div>
+                                        <div class="col-md-9">
+                                            <h2><a href="<?php echo the_permalink();?>"><?php echo the_title()?></a></h2>
+                                            <p class='meta'>
+                                                Posted @ <?php the_time()?> on <?php the_date();?> by <? the_author();?>
+                                            </p>
+                                            <div class="excerpt">
+                                                <?php echo get_the_excerpt();?>
+                                            </div>
+                                            <br>
+                                            <a class='btn btn-default' href="<?php the_permalink();?>">Read More &raquo;</a>
+                                        </div>
+                                    <?php else : ?>
+                                        <div class="col-md-12">
+                                            <h2><a href="<?php echo the_permalink();?>"><?php echo the_title()?></a></h2>
+                                            <p class='meta'>
+                                                Posted @ <?php the_time()?> on <?php the_date();?> by <? the_author();?>
+                                            </p>
+                                            <div class="excerpt">
+                                                <?php echo get_the_excerpt();?>
+                                            </div>
+                                            <br>
+                                            <a class='btn btn-default' href="<?php the_permalink();?>">Read More &raquo;</a>
+                                            
+                                        </div>
+                                    <?php endif; ?>
                                 </div>
-                                <div class="col-md-9">
-                                    <h2><?php echo the_title()?></h2>
-                                </div>
-                            </div>
+                            </article>
                         <?php endwhile; ?>
                     <?php endif; ?>
                 </div>

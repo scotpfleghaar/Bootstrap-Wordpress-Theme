@@ -21,9 +21,23 @@
 
         <!-- Collect the nav links, forms, and other content for toggling -->
         <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
-        
-        <form class="navbar-form navbar-left">
-           
+            <?php
+                wp_nav_menu( array(
+                    'theme_location'    => 'primary',
+                    'depth'             => 2,
+                    'container'         => false,
+                    'menu_class'        => 'nav navbar-nav',
+                    'fallback_cb'       => 'WP_Bootstrap_Navwalker::fallback',
+                    'walker'            => new WP_Bootstrap_Navwalker())
+                );
+            ?> 
+        <form method='get' class="navbar-form navbar-right" action='<?php echo esc_url(home_url('/')); ?>'>
+           <label for="navbar-search" class='sr-only'><?php _e('Search', 'textdomain')?></label>
+           <div class="form-group">
+               <input type="text" class='form-control' name='s' id="navbar-search">
+
+           </div>
+           <button type='submit' class='btn btn-defualt'><?php _e('Search', 'textdomain')?></button>
         </form>
        
         </div><!-- /.navbar-collapse -->
